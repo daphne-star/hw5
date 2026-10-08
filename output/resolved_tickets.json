@@ -1,0 +1,435 @@
+{
+  "generated_at": "2026-10-08T03:47:42+00:00",
+  "shop_date": "2026-08-31",
+  "sources": {
+    "facts": "data/campus_customs_new.db \u2014 final status, payments, approvals, drafts",
+    "agent_work": "output/audit_trail.json \u2014 latest run per ticket",
+    "note": "Agent contributions are what each agent said and did. The what_changed block is read from the database, so a claim and its effect can be compared rather than conflated."
+  },
+  "cash": {
+    "accounts": [
+      {
+        "name": "checking",
+        "balance": 160.0,
+        "date": "2026-08-31"
+      }
+    ],
+    "total_balance": 160.0
+  },
+  "totals": {
+    "tickets": 3,
+    "by_status": {
+      "blocked": 3
+    },
+    "payments_made": 2,
+    "paid_out": 3240.0,
+    "approvals_pending": 1,
+    "purchase_orders_placed": 0,
+    "drafts_written": 2,
+    "messages_sent": 0
+  },
+  "tickets": [
+    {
+      "id": 101,
+      "subject": "Bulldog tee",
+      "type": "customer_order",
+      "requester": "Tauhid Zaman",
+      "final_status": "blocked",
+      "assignee": "Accounting",
+      "outcome": {
+        "summary": "Ticket 101 is **blocked**.\n\n- Size S is out of stock.\n- The matching vendor is blocked by overdue invoice 501 ($840).\n- Human approvals are still pending for the invoice payment (approval 2) and purchase order ($8, approval 3).\n- No payment or purchase order has been executed.\n- If both approvals clear, the tee is expected to arrive September 5, 2026.\n- Customer Service saved an unsent update draft for the customer.",
+        "decided_by_agent": "Boss",
+        "still_open": [
+          "Approval 3 for $8.00 (purchase order) is waiting on a human."
+        ],
+        "notes": "Needs a tee in size S.\n2026-08-31: Triage: verify size-S stock and fulfillment/restock path; Accounting will review the attached overdue vendor invoice.\n2026-08-31: [Accounting] Accounting verified checking balance $3,400 as of 2026-08-31. Invoice 501 to Bulldog Print Co is open and overdue for $840. Pricing confirmed for CC-TEE-WHITE: unit cost/PO total $8. Requested invoice approval 2 for $840 and purchase_order approval 3 for $8 with vendor 1, SKU CC-TEE-WHITE, size S, qty 1. Both are pending human approval; no payment or purchase order has been executed. If both later clear, combined outflow is $848 and balance would be $2,552 (before other obligations).\n2026-08-31: [Inventory] Inventory check: CC-TEE-WHITE size S on hand 0 (listed in Aisle B), order qty 1, shortfall 1. Bulldog Print Co is the matching apparel reprint vendor; lead time 5 days, earliest arrival 2026-09-05. Vendor is blocked by open overdue invoice 501 for $840. Accounting reports payment approval ID 2 and purchase-order approval ID 3 are pending human approval; no payment or purchase order placed. Once invoice is paid and PO approval is approved, order 1 unit at $8 total can be placed; arrival 2026-09-05.\n2026-08-31: Inventory found size S out of stock; review overdue invoice 501 ($840), pending approvals, and whether payment/PO can proceed.\n2026-08-31: Blocked pending human approval of invoice payment request 2 ($840 overdue to Bulldog Print Co) and purchase-order request 3 ($8 for 1 CC-TEE-WHITE size S). Size S has 0 on hand, so the order cannot be fulfilled now; no payment or PO has been executed. If both approvals clear, Inventory can place the PO with expected arrival 2026-09-05. Customer Service saved an unsent update draft. Verified approvals are still pending, with no invoice payment or purchase order recorded."
+      },
+      "what_changed": {
+        "payments": [
+          {
+            "id": 2,
+            "kind": "invoice",
+            "amount": 840.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "Daphne"
+          }
+        ],
+        "purchase_orders": [],
+        "drafts": [
+          {
+            "id": 2,
+            "recipient": "Tauhid Zaman",
+            "subject": "Update on your Bulldog tee",
+            "written_by": "Customer Service"
+          }
+        ]
+      },
+      "run": {
+        "run_id": "run_0a29484c523a",
+        "recorded_at": "2026-10-08T03:42:27+00:00",
+        "mode": "full_team",
+        "entry_agent": "Boss",
+        "agents_involved": [
+          "Boss",
+          "Inventory",
+          "Accounting",
+          "Customer Service"
+        ],
+        "handoffs": [
+          "Boss -> Inventory",
+          "Inventory -> Accounting",
+          "Boss -> Customer Service"
+        ],
+        "tool_calls_used": 31,
+        "delegations_used": 3,
+        "earlier_runs_on_this_ticket": 3
+      },
+      "agent_contributions": [
+        {
+          "agent": "Boss",
+          "tools_used": [
+            "get_ticket",
+            "get_today",
+            "assign_ticket",
+            "assign_ticket",
+            "list_approvals",
+            "list_purchase_orders",
+            "list_payments",
+            "list_drafts",
+            "set_ticket_status"
+          ],
+          "delegated_to": [
+            "Inventory",
+            "Customer Service"
+          ],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 101 is **blocked**.\n\n- Size S is out of stock.\n- The matching vendor is blocked by overdue invoice 501 ($840).\n- Human approvals are still pending for the invoice payment (approval 2) and purchase order ($8, approval 3).\n- No payment or purchase order has been executed.\n- If both approvals clear, the tee is expected to arrive September 5, 2026.\n- Customer Service saved an unsent update draft for the customer."
+        },
+        {
+          "agent": "Inventory",
+          "tools_used": [
+            "get_ticket",
+            "get_today",
+            "get_inventory",
+            "list_vendors",
+            "list_invoices",
+            "get_pricing",
+            "add_ticket_note"
+          ],
+          "delegated_to": [
+            "Accounting"
+          ],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 101 outcome:\n\n- **Requested:** 1 \u00d7 `CC-TEE-WHITE`, size S\n- **On hand:** 0\n- **Shortfall:** 1\n- **Fulfillable now:** No; size S is out of stock.\n- **Restock vendor:** Bulldog Print Co \u2014 apparel reprint\n- **Lead time:** 5 days\n- **Expected arrival:** 2026-09-05\n- **Timing:** Restock would arrive on 2026-09-05, subject to the order being placed.\n- **Blockers:** Vendor has open overdue invoice 501 for **$840** and will not ship until it is paid. Accounting has requested invoice-payment approval **ID 2** and purchase-order approval **ID 3**; both are pending human approval.\n- **Purchase ord"
+        },
+        {
+          "agent": "Accounting",
+          "tools_used": [
+            "get_today",
+            "get_cash_accounts",
+            "list_invoices",
+            "get_pricing",
+            "get_ticket",
+            "list_approvals",
+            "request_approval",
+            "request_approval",
+            "add_ticket_note"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "- **Checking balance:** $3,400\n- **Open overdue invoice:** $840 to Bulldog Print Co, invoice **501**\n- **Pricing confirmed:** CC-TEE-WHITE size S, **unit cost $8; total for 1 unit $8**\n- **Invoice approval:** **ID 2**, pending human approval\n- **Purchase-order approval:** **ID 3**, pending human approval, with vendor 1, SKU, size S, and quantity 1 attached\n\nNo payment has been made yet because approval is still pending. Once both are approved, the combined outflow will be **$848**, leaving **$2,552**. Payment of invoice 501 is required before Bulldog Print Co can ship; the vendor remains block"
+        },
+        {
+          "agent": "Customer Service",
+          "tools_used": [
+            "get_today",
+            "get_ticket",
+            "list_purchase_orders",
+            "list_drafts",
+            "save_draft_message"
+          ],
+          "delegated_to": [],
+          "refusals": [
+            {
+              "tool": "get_inventory",
+              "code": "not_found",
+              "message": "No inventory row for sku 'BULLDOG-TEE' in size 'S'. The shop may not carry it."
+            }
+          ],
+          "limits_hit": [],
+          "reported": "Draft saved for **Tauhid Zaman**. It explains that the size-S Bulldog tee is out of stock, fulfillment is awaiting vendor payment and purchase approval, and the expected arrival is **September 5, 2026** if approvals clear. It has not been sent."
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 2,
+          "kind": "invoice",
+          "amount": 840.0,
+          "account": "checking",
+          "requested_by": "Accounting",
+          "reason": "Pay overdue invoice 501 to Bulldog Print Co for the CC-TEE-WHITE size S rush reprint, enabling the vendor to ship; checking balance is $3,400 and this payment would leave $2,560 before other obligations.",
+          "status": "approved",
+          "decided_by": "Daphne",
+          "decided_at": "2026-08-31",
+          "executed": {
+            "payment_id": 2,
+            "amount": 840.0,
+            "paid_at": "2026-08-31",
+            "approved_by": "Daphne"
+          }
+        },
+        {
+          "approval_id": 3,
+          "kind": "purchase_order",
+          "amount": 8.0,
+          "account": "checking",
+          "requested_by": "Accounting",
+          "reason": "Purchase 1 CC-TEE-WHITE, size S, from Bulldog Print Co at the confirmed unit cost of $8; checking balance is $3,400 and this order would leave $3,392 before other obligations. Vendor invoice 501 must be paid before shipment.",
+          "status": "pending",
+          "decided_by": null,
+          "decided_at": null,
+          "executed": null
+        }
+      ]
+    },
+    {
+      "id": 102,
+      "subject": "Rent due",
+      "type": "rent_notice",
+      "requester": "Elm City Properties",
+      "final_status": "blocked",
+      "assignee": "Facilities",
+      "outcome": {
+        "summary": "Ticket 102 is **blocked**.\n\n- Facilities confirmed $2,400 rent is due September 2, 2026.\n- Accounting confirmed sufficient cash, but human approval **#1** is still pending.\n- No rent payment has been made.\n- The ticket will be unblocked when approval is granted, allowing Accounting to release the payment.",
+        "decided_by_agent": "Boss",
+        "still_open": [
+          "Marked blocked by the Boss; see the ticket notes for what is in the way."
+        ],
+        "notes": "Email: shop rent due in 2 days.\n2026-08-31: Rent notice requires lease/due-date handling; Accounting also asked to assess payment readiness and approval.\n2026-08-31: [Accounting] Accounting assessment 2026-08-31: checking balance $3,400. Open invoice 501 for $840 is overdue (3 days); rent is $2,400 due 2026-09-02. Requested human approval #1 for exact $2,400 rent payment from checking. Payment cannot be completed until approval #1 is approved; after rent and invoice, projected balance is $160.\n2026-08-31: [Facilities] Facilities confirmation as of shop date 2026-08-31: Lease 1 (Chapel Street shop) requires $2,400 monthly rent, due 2026-09-02 (2 days; not overdue). Checking has $3,400. Rent approval #1 for exact $2,400 is pending; no payment has moved. Cash conflict: overdue invoice 501 is $840, so paying both would leave projected $160. Facilities cannot contact the landlord; no customer-facing draft is needed because this is an internal landlord/rent matter. If landlord communication becomes necessary, Customer Service should draft it for human sending.\n2026-08-31: Lease review confirms $2,400 rent for Chapel Street shop is due 2026-09-02 and is not overdue. Accounting confirmed $3,400 checking balance, but no payment has been made because human approval #1 for the exact $2,400 is still pending. Ticket is blocked until that approval is decided; once approved, payment can be released."
+      },
+      "what_changed": {
+        "payments": [
+          {
+            "id": 1,
+            "kind": "rent",
+            "amount": 2400.0,
+            "account": "checking",
+            "paid_at": "2026-08-31",
+            "approved_by": "Daphne"
+          }
+        ],
+        "purchase_orders": [],
+        "drafts": []
+      },
+      "run": {
+        "run_id": "run_f4cb27708ee7",
+        "recorded_at": "2026-10-08T03:39:25+00:00",
+        "mode": "full_team",
+        "entry_agent": "Boss",
+        "agents_involved": [
+          "Boss",
+          "Accounting",
+          "Facilities"
+        ],
+        "handoffs": [
+          "Boss -> Accounting",
+          "Boss -> Facilities"
+        ],
+        "tool_calls_used": 20,
+        "delegations_used": 2,
+        "earlier_runs_on_this_ticket": 4
+      },
+      "agent_contributions": [
+        {
+          "agent": "Boss",
+          "tools_used": [
+            "get_today",
+            "get_ticket",
+            "assign_ticket",
+            "list_approvals",
+            "list_payments",
+            "set_ticket_status"
+          ],
+          "delegated_to": [
+            "Accounting",
+            "Facilities"
+          ],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 102 is **blocked**.\n\n- Facilities confirmed $2,400 rent is due September 2, 2026.\n- Accounting confirmed sufficient cash, but human approval **#1** is still pending.\n- No rent payment has been made.\n- The ticket will be unblocked when approval is granted, allowing Accounting to release the payment."
+        },
+        {
+          "agent": "Accounting",
+          "tools_used": [
+            "get_today",
+            "get_cash_accounts",
+            "list_invoices",
+            "get_ticket",
+            "list_approvals",
+            "list_approvals",
+            "request_approval",
+            "add_ticket_note"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "**Ticket 102 \u2014 Accounting assessment**\n\n- **Checking balance:** $3,400\n- **Rent due:** $2,400 on 2026-09-02\n- **Other amount owed:** $840 overdue invoice 501, due 2026-08-28\n- **Approval:** Requested human approval **#1** for the exact $2,400 rent payment from checking; it is currently pending.\n- **Can payment be completed now?** No. Payment requires approval #1 to be approved.\n- **Projected balance after rent and the overdue invoice:** **$160**\n\nThe rent payment is cash-affordable alongside the invoice, but it cannot be released until human approval is granted."
+        },
+        {
+          "agent": "Facilities",
+          "tools_used": [
+            "get_today",
+            "get_ticket",
+            "list_leases",
+            "get_cash_accounts",
+            "list_approvals",
+            "add_ticket_note"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 102 updated.\n\n- **Lease:** Chapel Street shop, Lease 1  \n- **Rent:** $2,400 monthly  \n- **Due:** September 2, 2026 \u2014 2 days from the shop\u2019s date of August 31; not overdue  \n- **Cash:** $3,400 in checking, enough for rent alone  \n- **Conflict:** Overdue invoice 501 is $840; paying both would leave a projected $160  \n- **Approval:** Rent approval #1 is pending; no payment has been made  \n- **Landlord/customer communication:** Facilities cannot contact the landlord. No customer-facing draft is needed. If landlord communication becomes necessary, Customer Service should draft it for human s"
+        }
+      ],
+      "human_approvals": [
+        {
+          "approval_id": 1,
+          "kind": "rent",
+          "amount": 2400.0,
+          "account": "checking",
+          "requested_by": "Accounting",
+          "reason": "Pay the $2,400 monthly rent for Chapel Street shop to Elm City Properties, due 2026-09-02; checking balance is $3,400 and the open $840 invoice must also be covered, leaving $160 after both obligations.",
+          "status": "approved",
+          "decided_by": "Daphne",
+          "decided_at": "2026-08-31",
+          "executed": {
+            "payment_id": 1,
+            "amount": 2400.0,
+            "paid_at": "2026-08-31",
+            "approved_by": "Daphne"
+          }
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "subject": "Bulk hoodie discount",
+      "type": "price_override",
+      "requester": "Yale AI Club",
+      "final_status": "blocked",
+      "assignee": "Accounting",
+      "outcome": {
+        "summary": "Ticket 103 is **blocked**.\n\n- Accounting reviewed the discount and recommends **10% off: $52.20 each, $1,044 total**, with healthy margin.\n- Inventory found only **8 of 20** medium navy hoodies in stock; **12 need restocking**.\n- The vendor cannot ship until overdue **invoice 501 for $840** is paid. No payment approval or purchase order exists.\n- Customer Service saved a draft explaining the shortage and contingent pricing; it has not been sent.\n\nThe ticket will remain blocked until the invoice is approved and paid and the 12-unit restock is ordered and confirmed.",
+        "decided_by_agent": "Boss",
+        "still_open": [
+          "Marked blocked by the Boss; see the ticket notes for what is in the way."
+        ],
+        "notes": "Student org wants 20 hoodies, size M, asking for a bulk discount.\n2026-08-31: Accounting to evaluate the requested bulk discount and affordability for 20 medium navy hoodies.\n2026-08-31: [Accounting] Accounting review (2026-08-31): CC-HOOD-NAVY M pricing is $58 list / $22 unit cost. For 20 units, list revenue is $1,160, product cost is $440, and list margin is $720 (62.07% of sales). A discount is acceptable only if the final price remains at least $22/unit; at cost there is $0 margin. No requested discount amount was specified, so no price override was finalized. Checking balance is $3,400; open overdue invoice 501 totals $840, leaving $2,560 if paid. Recommend approving a reasonable bulk discount in principle, with Boss setting the exact final price and obtaining any required approval; a 10% example price of $52.20/unit ($1,044 total) would retain $604 total margin ($30.20/unit; 57.85% rate).\n2026-08-31: [Inventory] Inventory check: CC-HOOD-NAVY size M has 8 units on hand (Aisle A) against 20 requested, so shortfall is 12 units. Other sizes do not substitute. Apparel reprint vendor Bulldog Print Co (5-day lead; earliest arrival 2026-09-05) is the only matching restock vendor, but vendor is blocked by open overdue invoice 501 for $840; Accounting must pay it before a restock order can ship. Current 8 units are available; full 20 are not.\n2026-08-31: Bulk discount reviewed: Accounting recommends a 10% discount at $52.20 each ($1,044 total), safely above the $22 unit cost. However, only 8 of 20 size-M CC-HOOD-NAVY hoodies are in stock; 12 require restocking. Bulldog Print Co. cannot ship because overdue invoice 501 for $840 remains open, and no purchase order or payment approval exists. Customer Service saved a draft explaining the shortage and contingent pricing; nothing was sent. Ticket is blocked until invoice 501 is paid/approved and the 12-unit restock can be ordered and confirmed."
+      },
+      "what_changed": {
+        "payments": [],
+        "purchase_orders": [],
+        "drafts": [
+          {
+            "id": 1,
+            "recipient": "Yale AI Club",
+            "subject": "Update on 20 medium navy hoodies",
+            "written_by": "Customer Service"
+          }
+        ]
+      },
+      "run": {
+        "run_id": "run_d5ea3699a008",
+        "recorded_at": "2026-10-08T03:38:07+00:00",
+        "mode": "full_team",
+        "entry_agent": "Boss",
+        "agents_involved": [
+          "Boss",
+          "Accounting",
+          "Inventory",
+          "Customer Service"
+        ],
+        "handoffs": [
+          "Boss -> Accounting",
+          "Boss -> Inventory",
+          "Boss -> Customer Service"
+        ],
+        "tool_calls_used": 25,
+        "delegations_used": 3,
+        "earlier_runs_on_this_ticket": 3
+      },
+      "agent_contributions": [
+        {
+          "agent": "Boss",
+          "tools_used": [
+            "get_ticket",
+            "get_today",
+            "assign_ticket",
+            "list_purchase_orders",
+            "list_approvals",
+            "list_drafts",
+            "list_invoices",
+            "set_ticket_status"
+          ],
+          "delegated_to": [
+            "Accounting",
+            "Inventory",
+            "Customer Service"
+          ],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 103 is **blocked**.\n\n- Accounting reviewed the discount and recommends **10% off: $52.20 each, $1,044 total**, with healthy margin.\n- Inventory found only **8 of 20** medium navy hoodies in stock; **12 need restocking**.\n- The vendor cannot ship until overdue **invoice 501 for $840** is paid. No payment approval or purchase order exists.\n- Customer Service saved a draft explaining the shortage and contingent pricing; it has not been sent.\n\nThe ticket will remain blocked until the invoice is approved and paid and the 12-unit restock is ordered and confirmed."
+        },
+        {
+          "agent": "Accounting",
+          "tools_used": [
+            "get_today",
+            "get_ticket",
+            "get_pricing",
+            "get_cash_accounts",
+            "list_invoices",
+            "add_ticket_note"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 103 \u2014 Accounting review:\n\n- **Checking balance:** $3,400\n- **Open overdue invoices:** $840, including invoice 501; balance after payment would be **$2,560**\n- **Pricing:** $58 list price, $22 unit cost\n- **20-unit list total:** $1,160\n- **List margin:** $720 total, or $36/unit (**62.07%**)\n\n**Recommendation:** Approve a reasonable bulk discount in principle, but do not finalize until Boss sets the exact discount and obtains any required approval. The final price must be at least **$22 per hoodie** to avoid a loss. At cost, total margin would be $0.\n\nFor reference, a **10% discount** wou"
+        },
+        {
+          "agent": "Inventory",
+          "tools_used": [
+            "get_ticket",
+            "get_inventory",
+            "get_today",
+            "list_vendors",
+            "list_invoices",
+            "add_ticket_note"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Ticket 103 findings:\n\n- **On hand:** 8 units of `CC-HOOD-NAVY`, size M.\n- **Requested:** 20 units.\n- **Shortfall:** **12 units**. Other sizes cannot substitute.\n- **Restock vendor:** Bulldog Print Co, apparel reprint; **5-day lead time**, earliest arrival **2026-09-05**.\n- **Constraint:** The vendor has open overdue invoice **501 for $840** and is blocked from shipping. Accounting must pay it before a restock order can be placed.\n- The inventory finding has been added to ticket 103."
+        },
+        {
+          "agent": "Customer Service",
+          "tools_used": [
+            "get_ticket",
+            "get_today",
+            "get_inventory",
+            "list_purchase_orders",
+            "save_draft_message"
+          ],
+          "delegated_to": [],
+          "refusals": [],
+          "limits_hit": [],
+          "reported": "Draft saved for **Yale AI Club**. It explains that 8 of 20 medium navy hoodies are in stock, 12 need restocking, the vendor is blocked pending payment of invoice 501, and the proposed $52.20 each/$1,044 total bulk price is contingent on availability. **Nothing was sent.**"
+        }
+      ],
+      "human_approvals": []
+    }
+  ]
+}

@@ -1,0 +1,324 @@
+{
+  "server": {
+    "name": "campus-customs",
+    "version": "0.1.0"
+  },
+  "database": "campus_customs_new.db",
+  "shop_date": "2026-08-31",
+  "tool_count": 21,
+  "tools": [
+    {
+      "name": "get_today",
+      "kind": "read",
+      "summary": "Get the shop's current date and any note left at the front desk.",
+      "parameters": [],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_tickets",
+      "kind": "read",
+      "summary": "List tickets on the board, newest first, optionally filtered.",
+      "parameters": [
+        "status",
+        "ticket_type"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "get_ticket",
+      "kind": "read",
+      "summary": "Get one ticket by its id, with the lease and invoice it points at already resolved.",
+      "parameters": [
+        "ticket_id"
+      ],
+      "required": [
+        "ticket_id"
+      ],
+      "read_only_hint": true
+    },
+    {
+      "name": "get_inventory",
+      "kind": "read",
+      "summary": "Look up stock on hand, by SKU and size.",
+      "parameters": [
+        "size",
+        "sku"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "get_pricing",
+      "kind": "read",
+      "summary": "Get unit cost and list price for a product, with its margin worked out.",
+      "parameters": [
+        "sku"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_vendors",
+      "kind": "read",
+      "summary": "List vendors with their lead times and the earliest date an order could land.",
+      "parameters": [
+        "specialty_contains"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_leases",
+      "kind": "read",
+      "summary": "List the shop's leases with rent amounts and how close the next payment is.",
+      "parameters": [],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "get_cash_accounts",
+      "kind": "read",
+      "summary": "Get cash balances. This is the only record of how much money the shop has.",
+      "parameters": [
+        "name"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_invoices",
+      "kind": "read",
+      "summary": "List bills the shop owes, flagged for whether they are overdue.",
+      "parameters": [
+        "status",
+        "vendor_id"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_payments",
+      "kind": "read",
+      "summary": "List money that has already left the shop, and who approved each payment.",
+      "parameters": [
+        "kind"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_approvals",
+      "kind": "read",
+      "summary": "List approval requests and what humans decided about them.",
+      "parameters": [
+        "status"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_purchase_orders",
+      "kind": "read",
+      "summary": "List restock orders placed with vendors, and when each is expected to land.",
+      "parameters": [
+        "status"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "list_drafts",
+      "kind": "read",
+      "summary": "List customer messages written to the board. None of them have been sent.",
+      "parameters": [
+        "ticket_id"
+      ],
+      "required": [],
+      "read_only_hint": true
+    },
+    {
+      "name": "request_approval",
+      "kind": "write",
+      "summary": "Ask a human to approve money leaving the shop. Creates a pending approval.",
+      "parameters": [
+        "account",
+        "amount",
+        "kind",
+        "reason",
+        "ref_id",
+        "requested_by",
+        "ticket_id"
+      ],
+      "required": [
+        "account",
+        "amount",
+        "kind",
+        "reason",
+        "requested_by"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "record_approval_decision",
+      "kind": "write",
+      "summary": "Record a human's approve-or-reject decision on a pending approval.",
+      "parameters": [
+        "approval_id",
+        "decided_by",
+        "decision"
+      ],
+      "required": [
+        "approval_id",
+        "decided_by",
+        "decision"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "make_payment",
+      "kind": "write",
+      "summary": "Pay money out of a cash account. Requires an approval, and refuses to overdraw.",
+      "parameters": [
+        "account",
+        "amount",
+        "approval_id",
+        "kind",
+        "ref_id"
+      ],
+      "required": [
+        "account",
+        "amount",
+        "approval_id",
+        "kind",
+        "ref_id"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "create_purchase_order",
+      "kind": "write",
+      "summary": "Place a restock order with a vendor. Refused if that vendor is owed money.",
+      "parameters": [
+        "approval_id",
+        "notes",
+        "qty",
+        "size",
+        "sku",
+        "ticket_id",
+        "vendor_id"
+      ],
+      "required": [
+        "approval_id",
+        "qty",
+        "size",
+        "sku",
+        "vendor_id"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "save_draft_message",
+      "kind": "write",
+      "summary": "Write a customer message to the board as a draft. Nothing is sent.",
+      "parameters": [
+        "body",
+        "recipient",
+        "subject",
+        "ticket_id",
+        "written_by"
+      ],
+      "required": [
+        "body",
+        "recipient",
+        "subject",
+        "written_by"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "set_ticket_status",
+      "kind": "write",
+      "summary": "Move a ticket to a new state.",
+      "parameters": [
+        "note",
+        "status",
+        "ticket_id"
+      ],
+      "required": [
+        "status",
+        "ticket_id"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "assign_ticket",
+      "kind": "write",
+      "summary": "Put a ticket in a particular agent's hands.",
+      "parameters": [
+        "assignee",
+        "note",
+        "ticket_id"
+      ],
+      "required": [
+        "assignee",
+        "ticket_id"
+      ],
+      "read_only_hint": false
+    },
+    {
+      "name": "add_ticket_note",
+      "kind": "write",
+      "summary": "Append a note to a ticket without changing its state.",
+      "parameters": [
+        "author",
+        "note",
+        "ticket_id"
+      ],
+      "required": [
+        "author",
+        "note",
+        "ticket_id"
+      ],
+      "read_only_hint": false
+    }
+  ],
+  "hints_correct": true,
+  "unregistered": [],
+  "sample_call": {
+    "tool": "list_invoices",
+    "arguments": {
+      "status": "open"
+    },
+    "is_error": false,
+    "structured_content": {
+      "ok": true,
+      "data": [
+        {
+          "id": 501,
+          "vendor_id": 1,
+          "vendor_name": "Bulldog Print Co",
+          "amount": 840.0,
+          "due_date": "2026-08-28",
+          "status": "open",
+          "description": "Rush reprint CC-TEE-WHITE S",
+          "is_overdue": true,
+          "days_overdue": 3
+        }
+      ],
+      "meta": {
+        "count": 1,
+        "as_of": "2026-08-31",
+        "open_count": 1,
+        "open_total": 840.0
+      }
+    }
+  },
+  "read_only_check": {
+    "statement": "UPDATE cash_accounts SET balance = 0",
+    "refused": true,
+    "sqlite_error": "attempt to write a readonly database"
+  },
+  "ok": true
+}

@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "campus-customs": {
+      "command": "python",
+      "args": ["-m", "mcp_server.server"],
+      "cwd": "."
+    }
+  }
+}

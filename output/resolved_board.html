@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs — The Board, Resolved</title>
+<style>
+  :root {
+    --bg:          #fbf9f7;
+    --surface:     #ffffff;
+    --ink:         #3c3a40;
+    --ink-soft:    #6f6b76;
+    --ink-faint:   #9b96a2;
+    --line:        #e7e2ea;
+
+    --sky:         #e2ecf5;
+    --sky-edge:    #c3d7e8;
+    --mint:        #e3efe7;
+    --mint-edge:   #c4dccd;
+    --clay:        #f2e3db;
+    --clay-edge:   #ddc4b6;
+    --butter:      #f7efdd;
+    --butter-edge: #e6d6b4;
+    --lilac:       #ebe6f4;
+    --lilac-edge:  #d2c8e4;
+
+    --radius:      8px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    padding: 2.5rem 1.5rem 4rem;
+    background: var(--bg);
+    color: var(--ink);
+    font: 15px/1.65 ui-sans-serif, -apple-system, "Segoe UI", Inter, system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 940px; margin: 0 auto; }
+
+  header.masthead { margin-bottom: 2rem; }
+
+  h1 { margin: 0 0 .3rem; font-size: 1.55rem; font-weight: 650; letter-spacing: -0.01em; }
+
+  .subtitle { margin: 0; color: var(--ink-soft); font-size: .9rem; }
+
+  .runline {
+    margin: 1rem 0 0;
+    display: flex; flex-wrap: wrap; gap: .4rem;
+  }
+
+  .pill {
+    font-size: .76rem;
+    border-radius: 99px;
+    padding: .18rem .7rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+  }
+  .pill--blocked { background: var(--clay);   border-color: var(--clay-edge);   color: var(--ink); }
+  .pill--money   { background: var(--mint);   border-color: var(--mint-edge);   color: var(--ink); }
+  .pill--waiting { background: var(--butter); border-color: var(--butter-edge); color: var(--ink); }
+
+  figure {
+    margin: 0 0 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: .85rem .85rem 0;
+    overflow: hidden;
+  }
+
+  figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+  }
+
+  figcaption {
+    padding: .85rem .35rem 1rem;
+    font-size: .92rem;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 650;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: .1rem .45rem;
+    margin-right: .5rem;
+    vertical-align: 2px;
+  }
+  .tag--board { background: var(--sky);   border-color: var(--sky-edge); }
+  .tag--t101  { background: var(--lilac); border-color: var(--lilac-edge); }
+  .tag--t102  { background: var(--mint);  border-color: var(--mint-edge); }
+  .tag--t103  { background: var(--clay);  border-color: var(--clay-edge); }
+
+  footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    color: var(--ink-faint);
+    font-size: .82rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="masthead">
+    <h1>The board, resolved</h1>
+    <p class="subtitle">
+      Four screenshots from the dashboard after the agent team worked all three tickets.
+    </p>
+    <div class="runline">
+      <span class="pill pill--blocked">3 tickets · all blocked</span>
+      <span class="pill pill--money">$3,240 paid out, approved by a human</span>
+      <span class="pill pill--waiting">1 approval still pending</span>
+      <span class="pill">2 customer drafts · 0 messages sent</span>
+      <span class="pill">shop date 2026-08-31</span>
+    </div>
+  </header>
+
+  <figure>
+    <img src="Screenshot%202026-10-07%20233836.png"
+         alt="The ticket board with five status columns: two tickets in Open, ticket 103 in Blocked, and In progress, Resolved and Rejected empty.">
+    <figcaption>
+      <span class="tag tag--board">Board</span>
+      Ticket 103 has moved into the Blocked column after its run, where the card now offers
+      “see what happened” beside “run again”, while 101 and 102 wait in Open with their
+      start-run buttons.
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img src="Screenshot%202026-10-07%20234334.png"
+         alt="Run recap for ticket 101 showing 31 tool calls, three handoffs, and per-agent blocks for Boss and Inventory.">
+    <figcaption>
+      <span class="tag tag--t101">Ticket 101</span>
+      The recap for the Bulldog tee shows the handoff that did not go through the Boss —
+      <strong>Inventory → Accounting</strong> — and the Boss blocking the ticket because size S
+      is out of stock, the vendor is owed $840, and both approvals were still pending.
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img src="Screenshot%202026-10-07%20234324.png"
+         alt="Run recap for ticket 102 showing 20 tool calls, two handoffs, and the Boss and Accounting blocks.">
+    <figcaption>
+      <span class="tag tag--t102">Ticket 102</span>
+      On the rent notice the Boss chose <strong>blocked over resolved</strong> because no payment
+      had been made, and Accounting’s note shows it did the honest thing — requested approval for
+      the exact $2,400 and then stopped.
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img src="Screenshot%202026-10-07%20233821.png"
+         alt="Run recap for ticket 103 showing 25 tool calls, three handoffs, and the Boss and Accounting blocks.">
+    <figcaption>
+      <span class="tag tag--t103">Ticket 103</span>
+      For the bulk hoodie discount Accounting recommends <strong>10% off at $52.20 each</strong>
+      with the margin still healthy, while Inventory finds only 8 of the 20 mediums in stock and
+      the same unpaid invoice 501 blocking the restock.
+    </figcaption>
+  </figure>
+
+  <footer>
+    Campus Customs multi-agent operations · screenshots taken from the live dashboard,
+    captions written from the run traces in <code>output/audit_trail.json</code>.
+  </footer>
+
+</div>
+</body>
+</html>
